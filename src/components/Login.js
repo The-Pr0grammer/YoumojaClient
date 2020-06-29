@@ -63,21 +63,12 @@ function Login({ navigation }) {
 					style={styles.input}
 				/>
 				<Button
+          buttonStyle={{backgroundColor: 'black', borderRadius:18}}
+          titleStyle={{color:"red"}}
 					style={styles.loginButton}
 					onPress={() => navigation.navigate("Home")}
-				>
-					<Text
-						style={{
-							alignSelf: "center",
-							textAlign: "center",
-							fontSize: 20,
-							color: "red",
-							height: "85%",
-						}}
-					>
-						Log In
-					</Text>
-				</Button>
+					title="Log In"
+				></Button>
 			</View>
 			<View style={styles.loginBottom}></View>
 			<Text h6 style={styles.signupMess}>
@@ -148,7 +139,7 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 	},
 	loginButton: {
-		zIndex: 1,
+		color: "black",
 		marginTop: "15%",
 		alignSelf: "center",
 		position: "relative",
@@ -156,7 +147,6 @@ const styles = StyleSheet.create({
 		borderRadius: 20,
 		height: "37%",
 		width: "70%",
-		backgroundColor: "black",
 	},
 	signupMess: {
 		position: "absolute",

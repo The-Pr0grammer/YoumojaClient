@@ -9,10 +9,12 @@ import {
 } from "react-native-elements";
 import { Dimensions } from "react-native";
 import Image from "react-native-scalable-image";
+import Businesses from "./Businesses.js";
 
 function Home({ navigation }) {
 	return (
 		<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+			<Businesses />
 			<Button onPress={navigation.openDrawer} title="Open navigation drawer" />
 			<Button
 				onPress={() => navigation.navigate("Notifications")}

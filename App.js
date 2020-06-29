@@ -20,9 +20,9 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Drawer.Navigator initialRouteName="Login">
-				<Drawer.Screen name="Login" component={Login} />
 				<Drawer.Screen name="Home" component={Home} />
 				<Drawer.Screen name="Notifications" component={NotificationsScreen} />
+				<Drawer.Screen name="Logout" component={Login} />
 			</Drawer.Navigator>
 		</NavigationContainer>
 	);
