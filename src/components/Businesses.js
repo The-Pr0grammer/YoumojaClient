@@ -8,9 +8,10 @@ import {
 	StyleSheet,
 	ImageBackground,
 } from "react-native";
-import { Card } from "react-native-elements";
+import { Card, SearchBar } from "react-native-elements";
 import axios from "axios";
-
+import { vw, vh, vmin, vmax } from "react-native-expo-viewport-units";
+import TextTicker from "react-native-text-ticker";
 class Businesses extends Component {
 	constructor(props) {
 		super(props);
@@ -18,6 +19,7 @@ class Businesses extends Component {
 			businesesses: [],
 			page: 1,
 			error: null,
+			search: " ",
 		};
 	}
 	fetchUsers = () => {
@@ -37,46 +39,88 @@ class Businesses extends Component {
 	componentDidMount() {
 		this.fetchUsers(this.state.page);
 	}
+
+	updateSearch = (search) => {
+		this.setState({ search });
+	};
+
 	render() {
 		return (
-			<FlatList
-				style={styles.list}
-				contentContainerStyle={{
-					backgroundColor: "black",
-					alignItems: "center",
-					justifyContent: "center",
-					// marginTop: "10%",
+			<View
+				style={{
+					width: "100%",
+					height: "100%",
+					flex: 1,
+					backgroundColor: "blue",
 				}}
-				data={this.state.businesesses}
-				keyExtractor={(biz) => biz.id.toString()}
-				renderItem={({ item }) => (
-					<ImageBackground
-						source={"../images/Cd7AR4EW8AAJ8IB.jpg"}
-						style={styles.bg}
-					>
+			>
+				<View
+					style={{
+						width: "100%",
+						height: "20%",
+						position: "absolute",
+						bottom: "79.5%",
+						backgroundColor: "gold",
+					}}
+				>
+					<SearchBar
+						placeholder="Type Here..."
+						onChangeText={this.updateSearch}
+						value={this.state.search}
+						style={styles.search}
+					/>
+				</View>
+				<ImageBackground
+					source={require("../images/Jarrell-Wadsworth-Revolutionary-Print-Lusenhop-Tate-Loan-Tiff.jpg")}
+					style={styles.bg}
+				></ImageBackground>
 
-						
+				<FlatList
+					style={styles.list}
+					contentContainerStyle={{
+						backgroundColor: "rgba(0, 0, 0, 0)",
+						alignItems: "left",
+						justifyContent: "left",
+					}}
+					data={this.state.businesesses}
+					keyExtractor={(biz) => biz.id.toString()}
+					renderItem={({ item }) => (
+						<View style={styles.cardView}>
 							<Card
 								containerStyle={{
-                  // backgroundColor: 'transparent',
-                  padding: 0,
+									width: vw(65),
+									padding: 0,
 									borderWidth: 0,
 									shadowColor: "rgba(0,0,0, 0.0)",
 									shadowOffset: { height: 0, width: 0 },
 									shadowOpacity: 0,
 									shadowRadius: 0,
-                  elevation: 0,
+									elevation: 0,
+									backgroundColor: "transparent",
 								}}
 							>
 								<Image
 									style={styles.img}
 									source={require("../images/30minneapolis-videoSixteenByNine3000-scaled.jpg")}
 								/>
-								<Text>{item.login}</Text>
 							</Card>
-              </ImageBackground>
-				)}
-			/>
+							<View styles={{ width: vw(100), backgroundColor: "red" }}>
+								<TextTicker
+									duration={Math.random * 40000}
+									loop
+									bounce
+									repeatSpacer={0}
+									marqueeDelay={Math.random() * 2000}
+									style={styles.cardText}
+								>
+									made random text cos this is just an example of a businesses
+									description !!!!!!! yeeeeeeeeeeee 🔥🤯♥️
+								</TextTicker>
+							</View>
+						</View>
+					)}
+				/>
+			</View>
 		);
 	}
 }
@@ -85,19 +129,47 @@ export default Businesses;
 
 const styles = StyleSheet.create({
 	bg: {
-    backgroundColor: "transparent",
-    opacity: 0.9,
+		resizeMode: "cover",
+		opacity: 0.57,
 		padding: 0,
 		borderWidth: 0,
-		width: 400,
-    height: 300,
+		width: "100%",
+		height: "100%",
 	},
 	list: {
-    opacity: 0.9,
+		alignSelf: "auto",
+		marginTop: "40%",
+		position: "absolute",
+		opacity: 1.0,
+		height: "80%",
 		width: "100%",
 	},
+	cardView: {
+		marginTop: vh(-0.5),
+		padding: 0,
+	},
 	img: {
+		marginLeft: vh(-1.7),
 		width: undefined,
-		height: 265,
+		height: vh(30),
+		opacity: 1.0,
+		borderRadius: 6,
+	},
+	cardText: {
+		width: vw(100),
+		height: vh(5),
+		backgroundColor: "gray",
+		opacity: 0.85,
+		padding: 0,
+		textAlign: "center",
+		fontSize: vh(3),
+	},
+	search: {
+		// flex:2,
+		// position: "absolute",
+		// backgroundColor: "blue",
+		// top: 10,
+		height: 10,
+		width: 10,
 	},
 });
