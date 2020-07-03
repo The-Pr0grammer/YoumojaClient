@@ -19,7 +19,7 @@ class Businesses extends Component {
 			businesesses: [],
 			page: 1,
 			error: null,
-			search: " ",
+			search: "",
 		};
 	}
 	fetchUsers = () => {
@@ -51,23 +51,17 @@ class Businesses extends Component {
 					width: "100%",
 					height: "100%",
 					flex: 1,
-					backgroundColor: "blue",
+					backgroundColor: "black",
 				}}
 			>
-				<View
-					style={{
-						width: "100%",
-						height: "20%",
-						position: "absolute",
-						bottom: "79.5%",
-						backgroundColor: "gold",
-					}}
-				>
+				<View style={styles.searchDiv}>
 					<SearchBar
+						round
+						searchIcon={{ size: 24 }}
+						onChangeText={() => this.updateSearch}
 						placeholder="Type Here..."
-						onChangeText={this.updateSearch}
 						value={this.state.search}
-						style={styles.search}
+						inputContainerStyle={{ borderRadius: 16, backgroundColor: "green" }}
 					/>
 				</View>
 				<ImageBackground
@@ -105,7 +99,7 @@ class Businesses extends Component {
 								/>
 							</Card>
 							<View styles={{ width: vw(100), backgroundColor: "red" }}>
-								<TextTicker
+								{/* <TextTicker
 									duration={Math.random * 40000}
 									loop
 									bounce
@@ -115,7 +109,7 @@ class Businesses extends Component {
 								>
 									made random text cos this is just an example of a businesses
 									description !!!!!!! yeeeeeeeeeeee 🔥🤯♥️
-								</TextTicker>
+								</TextTicker> */}
 							</View>
 						</View>
 					)}
@@ -129,8 +123,9 @@ export default Businesses;
 
 const styles = StyleSheet.create({
 	bg: {
+		// flex:1,
 		resizeMode: "cover",
-		opacity: 0.57,
+		opacity: 0.2,
 		padding: 0,
 		borderWidth: 0,
 		width: "100%",
@@ -164,12 +159,14 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		fontSize: vh(3),
 	},
-	search: {
-		// flex:2,
-		// position: "absolute",
-		// backgroundColor: "blue",
-		// top: 10,
-		height: 10,
-		width: 10,
+	searchDiv: {
+		zIndex: 1,
+		opacity: 1.0,
+		width: "90%",
+		height: "10%",
+		paddingBottom: vh(4),
+		position: "absolute",
+		bottom: "79.5%",
+		flexDirection: "column-reverse",
 	},
 });
