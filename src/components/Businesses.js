@@ -25,7 +25,7 @@ class Businesses extends Component {
 	fetchUsers = () => {
 		const { page } = this.state;
 		axios
-			.get(`https://api.github.com/users?since=${page}&per_page=10`)
+			.get(`http://localhost:3000/user_bizs`)
 			.then((response) => {
 				this.setState({
 					businesesses: this.state.businesesses.concat(response.data),
@@ -40,8 +40,12 @@ class Businesses extends Component {
 		this.fetchUsers(this.state.page);
 	}
 
-	updateSearch = (search) => {
-		this.setState({ search });
+	updateSearch = (e) => {
+		return this.setState({ search: e });
+	};
+
+	searchSubmit = (e) => {
+		console.log(this.state.search);
 	};
 
 	render() {
@@ -58,10 +62,11 @@ class Businesses extends Component {
 					<SearchBar
 						round
 						searchIcon={{ size: 24 }}
-						onChangeText={() => this.updateSearch}
-						placeholder="Type Here..."
+						onChangeText={this.updateSearch}
+						onSubmit={this.searchSubmit}
+						placeholder="What are you looking for ?"
 						value={this.state.search}
-						inputContainerStyle={{ borderRadius: 16, backgroundColor: "green" }}
+						inputContainerStyle={{ borderRadius: 16, backgroundColor: "black" }}
 					/>
 				</View>
 				<ImageBackground
