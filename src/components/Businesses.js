@@ -16,7 +16,7 @@ class Businesses extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			businesesses: [],
+			businesses: [],
 			page: 1,
 			error: null,
 			search: "",
@@ -26,9 +26,12 @@ class Businesses extends Component {
 		const { page } = this.state;
 		axios
 			.get(`http://localhost:3000/user_bizs`)
+
 			.then((response) => {
 				this.setState({
-					businesesses: this.state.businesesses.concat(response.data),
+					businesses: response.data.filter((biz) =>
+						biz.business.name.includes(this.state.search)
+					),
 				});
 			})
 			.catch((error) => {
@@ -44,11 +47,8 @@ class Businesses extends Component {
 		return this.setState({ search: e });
 	};
 
-	searchSubmit = (e) => {
-		console.log(this.state.search);
-	};
-
 	render() {
+		console.log(this.state.search);
 		return (
 			<View
 				style={{
@@ -63,7 +63,7 @@ class Businesses extends Component {
 						round
 						searchIcon={{ size: 24 }}
 						onChangeText={this.updateSearch}
-						onSubmit={this.searchSubmit}
+						onSubmitEditing={(e) => this.fetchUsers(this.state.page)}
 						placeholder="What are you looking for ?"
 						value={this.state.search}
 						inputContainerStyle={{ borderRadius: 16, backgroundColor: "black" }}
@@ -81,7 +81,7 @@ class Businesses extends Component {
 						alignItems: "left",
 						justifyContent: "left",
 					}}
-					data={this.state.businesesses}
+					data={this.state.businesses}
 					keyExtractor={(biz) => biz.id.toString()}
 					renderItem={({ item }) => (
 						<View style={styles.cardView}>
