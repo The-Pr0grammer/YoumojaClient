@@ -100,7 +100,7 @@ class Businesses extends Component {
 							>
 								<Image
 									style={styles.img}
-									source={require("../images/30minneapolis-videoSixteenByNine3000-scaled.jpg")}
+									source={{ uri: item.business.image_url }}
 								/>
 							</Card>
 							<View styles={{ width: vw(100), backgroundColor: "red" }}>
