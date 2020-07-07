@@ -168,10 +168,12 @@ const styles = StyleSheet.create({
 		zIndex: 1,
 		opacity: 1.0,
 		width: "90%",
-		height: "10%",
+		// height: "10%",d .
 		paddingBottom: vh(4),
 		position: "absolute",
 		bottom: "79.5%",
 		flexDirection: "column-reverse",
 	},
 });
+
+//additional
