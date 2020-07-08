@@ -9,6 +9,7 @@ import {
 } from "react-native-elements";
 import { Dimensions } from "react-native";
 import Image from "react-native-scalable-image";
+import { connect } from "react-redux";
 
 function Login({ navigation }) {
 	return (
@@ -63,8 +64,8 @@ function Login({ navigation }) {
 					style={styles.input}
 				/>
 				<Button
-          buttonStyle={{backgroundColor: 'black', borderRadius:18}}
-          titleStyle={{color:"red"}}
+					buttonStyle={{ backgroundColor: "black", borderRadius: 18 }}
+					titleStyle={{ color: "red" }}
 					style={styles.loginButton}
 					onPress={() => navigation.navigate("Home")}
 					title="Log In"

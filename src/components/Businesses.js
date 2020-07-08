@@ -12,6 +12,7 @@ import { Card, SearchBar } from "react-native-elements";
 import axios from "axios";
 import { vw, vh, vmin, vmax } from "react-native-expo-viewport-units";
 import TextTicker from "react-native-text-ticker";
+import { connect } from 'react-redux'
 class Businesses extends Component {
 	constructor(props) {
 		super(props);

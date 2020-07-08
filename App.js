@@ -4,6 +4,12 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import Login from "./src/components/Login.js";
 import Home from "./src/components/Home.js";
+import {Provider} from 'react-redux'
+import{createStore} from 'redux'
+import counterReducer from './src/reducers/counter.js'
+
+const store = createStore(counterReducer, isLoggedReducer);
+
 
 function NotificationsScreen({ navigation }) {
 	return (
