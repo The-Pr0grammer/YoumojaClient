@@ -4,12 +4,12 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import Login from "./src/components/Login.js";
 import Home from "./src/components/Home.js";
-import {Provider} from 'react-redux'
-import{createStore} from 'redux'
-import counterReducer from './src/reducers/counter.js'
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import counterReducer from "./src/reducers/counter.js";
+import isLoggedReducer from "./src/reducers/isLogged.js";
 
-const store = createStore(counterReducer, isLoggedReducer);
-
+const store = createStore(isLoggedReducer);
 
 function NotificationsScreen({ navigation }) {
 	return (
@@ -22,14 +22,24 @@ function NotificationsScreen({ navigation }) {
 
 const Drawer = createDrawerNavigator();
 
-export default function App() {
-	return (
-		<NavigationContainer>
-			<Drawer.Navigator initialRouteName="Login">
-				<Drawer.Screen name="Home" component={Home} />
-				<Drawer.Screen name="Notifications" component={NotificationsScreen} />
-				<Drawer.Screen name="Logout" component={Login} />
-			</Drawer.Navigator>
-		</NavigationContainer>
-	);
+export default class App extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {
+		return (
+			<Provider store={store}>
+				<NavigationContainer>
+					<Drawer.Navigator initialRouteName="Login">
+						<Drawer.Screen name="Home" component={Home} />
+						<Drawer.Screen
+							name="Notifications"
+							component={NotificationsScreen}
+						/>
+						<Drawer.Screen name="Logout" component={Login} />
+					</Drawer.Navigator>
+				</NavigationContainer>
+			</Provider>
+		);
+	}
 }

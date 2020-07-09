@@ -12,7 +12,7 @@ import { Card, SearchBar } from "react-native-elements";
 import axios from "axios";
 import { vw, vh, vmin, vmax } from "react-native-expo-viewport-units";
 import TextTicker from "react-native-text-ticker";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 class Businesses extends Component {
 	constructor(props) {
 		super(props);
@@ -65,7 +65,7 @@ class Businesses extends Component {
 						searchIcon={{ size: 24 }}
 						onChangeText={this.updateSearch}
 						onSubmitEditing={(e) => this.fetchUsers(this.state.page)}
-						placeholder="What are you looking for ?"
+						placeholder={this.props.isLogged.toString()}
 						value={this.state.search}
 						inputContainerStyle={{ borderRadius: 16, backgroundColor: "black" }}
 					/>
@@ -125,7 +125,7 @@ class Businesses extends Component {
 	}
 }
 
-export default Businesses;
+export default connect(mapStateToProps)(Businesses);
 
 const styles = StyleSheet.create({
 	bg: {
@@ -177,4 +177,6 @@ const styles = StyleSheet.create({
 	},
 });
 
-//additional
+function mapStateToProps(state) {
+	return { isLogged: state.isLogged };
+}

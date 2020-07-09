@@ -11,74 +11,80 @@ import { Dimensions } from "react-native";
 import Image from "react-native-scalable-image";
 import { connect } from "react-redux";
 
-function Login({ navigation }) {
-	return (
-		<View style={styles.container}>
-			<Image
-				style={styles.background}
-				width={Dimensions.get("window").width}
-				source={require("../images/TulsaRiot.jpg")}
-			></Image>
-			<Image
-				style={styles.background}
-				width={Dimensions.get("window").width}
-				source={require("../images/TulsaBookerTWashHighBand.jpg")}
-			></Image>
-			<Image
-				style={{
-					position: "absolute",
-					bottom: "52%",
-					zIndex: 1,
-					alignSelf: "center",
-					backgroundColor: "black",
-				}}
-				width={Dimensions.get("window").width / 2}
-				source={require("../images/name.png")}
-			></Image>
-			<Image
-				style={styles.background}
-				width={Dimensions.get("window").width}
-				source={require("../images/tulsa.jpeg")}
-			></Image>
-			<Image
-				style={styles.background}
-				width={Dimensions.get("window").width}
-				source={require("../images/tulsaAftermath.jpeg")}
-			></Image>
-			<Image
-				width={Dimensions.get("window").width / 4.5}
-				style={styles.logo}
-				source={require("../images/LOGO.png")}
-			></Image>
-			<View style={styles.inputView2}>
-				<TextInput
-					textAlign
-					clearTextOnFocus={true}
-					defaultValue="username"
-					style={styles.input}
-				/>
-				<TextInput
-					textAlign
-					clearTextOnFocus={true}
-					defaultValue="password"
-					style={styles.input}
-				/>
-				<Button
-					buttonStyle={{ backgroundColor: "black", borderRadius: 18 }}
-					titleStyle={{ color: "red" }}
-					style={styles.loginButton}
-					onPress={() => navigation.navigate("Home")}
-					title="Log In"
-				></Button>
+class Login extends React.Component {
+	render() {
+		console.log(this.props.isLogged);
+		return (
+			<View style={styles.container}>
+				<Image
+					style={styles.background}
+					width={Dimensions.get("window").width}
+					source={require("../images/TulsaRiot.jpg")}
+				></Image>
+				<Image
+					style={styles.background}
+					width={Dimensions.get("window").width}
+					source={require("../images/TulsaBookerTWashHighBand.jpg")}
+				></Image>
+				<Image
+					style={{
+						position: "absolute",
+						bottom: "52%",
+						zIndex: 1,
+						alignSelf: "center",
+						backgroundColor: "black",
+					}}
+					width={Dimensions.get("window").width / 2}
+					source={require("../images/name.png")}
+				></Image>
+				<Image
+					style={styles.background}
+					width={Dimensions.get("window").width}
+					source={require("../images/tulsa.jpeg")}
+				></Image>
+				<Image
+					style={styles.background}
+					width={Dimensions.get("window").width}
+					source={require("../images/tulsaAftermath.jpeg")}
+				></Image>
+				<Image
+					width={Dimensions.get("window").width / 4.5}
+					style={styles.logo}
+					source={require("../images/LOGO.png")}
+				></Image>
+				<View style={styles.inputView2}>
+					<TextInput
+						textAlign
+						clearTextOnFocus={true}
+						defaultValue="username"
+						style={styles.input}
+					/>
+					<TextInput
+						textAlign
+						clearTextOnFocus={true}
+						defaultValue="password"
+						style={styles.input}
+					/>
+					<Button
+						buttonStyle={{ backgroundColor: "black", borderRadius: 18 }}
+						titleStyle={{ color: "red" }}
+						style={styles.loginButton}
+						onPress={() => {
+							this.props.signIn;
+							this.props.navigation.navigate("Home");
+						}}
+						title="Log In"
+					></Button>
+				</View>
+				<View style={styles.loginBottom}></View>
+				<Text h6 style={styles.signupMess}>
+					Don't have an account? Sign up for free.
+				</Text>
 			</View>
-			<View style={styles.loginBottom}></View>
-			<Text h6 style={styles.signupMess}>
-				Don't have an account? Sign up for free.
-			</Text>
-		</View>
-	);
+		);
+	}
 }
-export default Login;
+export default connect(mapStateToProps)(Login);
 
 const styles = StyleSheet.create({
 	container: {
@@ -159,3 +165,13 @@ const styles = StyleSheet.create({
 		left: 70,
 	},
 });
+
+function mapStateToProps(state) {
+	return { isLogged: state.isLogged };
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		signIn: () => dispatch({ type: "SIGN IN" }),
+	};
+}
