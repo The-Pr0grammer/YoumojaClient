@@ -70,7 +70,7 @@ class Login extends React.Component {
 						titleStyle={{ color: "red" }}
 						style={styles.loginButton}
 						onPress={() => {
-							this.props.signIn();
+							this.props.signIn;
 							this.props.navigation.navigate("Home");
 						}}
 						title="Log In"
@@ -84,7 +84,7 @@ class Login extends React.Component {
 		);
 	}
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps)(Login);
 
 const styles = StyleSheet.create({
 	container: {
