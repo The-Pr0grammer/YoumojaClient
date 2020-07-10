@@ -4,6 +4,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import Login from "./src/components/Login.js";
 import Home from "./src/components/Home.js";
+import Review from "./src/components/Review.js";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import counterReducer from "./src/reducers/counter.js";
@@ -33,8 +34,8 @@ export default class App extends React.Component {
 					<Drawer.Navigator initialRouteName="Login">
 						<Drawer.Screen name="Home" component={Home} />
 						<Drawer.Screen
-							name="Notifications"
-							component={NotificationsScreen}
+							name="Review"
+							component={Review}
 						/>
 						<Drawer.Screen name="Logout" component={Login} />
 					</Drawer.Navigator>
