@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 
 class Login extends React.Component {
 	render() {
-		console.log(this.props.isLogged);
+		// console.log(this.props.isLogged);
 		return (
 			<View style={styles.container}>
 				<Image
