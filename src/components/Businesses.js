@@ -23,13 +23,19 @@ class Businesses extends Component {
 		super(props);
 		this.state = {
 			businesses: [],
+			userLikes: [],
 			page: 1,
 			error: null,
 			search: "",
 		};
 	}
 
-	fetchUsers = () => {
+	componentDidMount() {
+		this.fetchBizs(this.state.page);
+		this.fetchLikes();
+	}
+
+	fetchBizs = () => {
 		const { page } = this.state;
 		axios
 			.get(`http://localhost:3000/user_bizs`)
@@ -46,16 +52,24 @@ class Businesses extends Component {
 			});
 	};
 
-	componentDidMount() {
-		this.fetchUsers(this.state.page);
-	}
+	fetchLikes = () => {
+		axios
+			.get(`http://localhost:3000/users/1`)
+
+			.then((response) => {
+				this.setState({ userLikes: response.data.user_likes });
+			})
+			.catch((error) => {
+				this.setState({ error: error });
+			});
+	};
 
 	updateSearch = (e) => {
 		return this.setState({ search: e });
 	};
 
 	render() {
-		console.log(this.state.search);
+		console.log(this.state.userLikes);
 		return (
 			<View
 				style={{
@@ -72,7 +86,7 @@ class Businesses extends Component {
 						searchIcon={{ size: 24 }}
 						onChangeText={this.updateSearch}
 						onSubmitEditing={(e) => this.fetchUsers(this.state.page)}
-						placeholder={"Looking for something specific?"}
+						placeholder={"Search by keyword, city/state or zip"}
 						value={this.state.search}
 						inputContainerStyle={{ borderRadius: 16, backgroundColor: "black" }}
 					/>

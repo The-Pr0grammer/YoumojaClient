@@ -27,12 +27,12 @@ class ListBiz extends Component {
 	}
 
 	componentDidMount() {
-		this.setState({ hearts: this.props.biz.hearts });
+		return this.setState({ hearts: this.props.biz.business.hearts });
 	}
 
 	incHearts = () => {
 		const axios = require("axios");
-		this.setState((prevState) => ({ hearts: prevState.current + 1 }));
+		this.setState((prevState) => ({ hearts: prevState.hearts + 1 }));
 		axios
 			.patch(
 				`http://localhost:3000/businesses/${this.props.biz.business.id}`,
@@ -43,14 +43,21 @@ class ListBiz extends Component {
 			)
 			.then(function (response) {
 				// console.log(response);
+			})
+			.catch((error) => {
+				console.log(error.response);
 			});
-		// .catch((error) => {
-		// 	console.log(error.response);
-		// });
+		axios
+			.post(`http://localhost:3000/user_likes`, {
+				user_id: 1,
+				business_id: this.props.biz.business.id,
+			})
+			.then(function (response) {
+				console.log(response);
+			});
 	};
 
 	render() {
-		console.log(this.props.biz.hearts);
 		return (
 			<View style={styles.cardView}>
 				<Card
@@ -107,7 +114,7 @@ class ListBiz extends Component {
 								width: 45,
 							}}
 						>
-							1
+							{this.state.hearts}
 						</Text>
 						{/* COMMENTS ICON */}
 						<TouchableOpacity
@@ -142,7 +149,7 @@ class ListBiz extends Component {
 								width: 45,
 							}}
 						>
-							{this.state.hearts}
+							100
 						</Text>
 
 						<ScrollView
