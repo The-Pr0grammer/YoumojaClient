@@ -6,7 +6,6 @@ import Login from "./src/components/Login.js";
 import Home from "./src/components/Home.js";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import counterReducer from "./src/reducers/counter.js";
 import isLoggedReducer from "./src/reducers/isLogged.js";
 
 const store = createStore(isLoggedReducer);
@@ -30,6 +29,7 @@ export default class App extends React.Component {
 		return (
 			<Provider store={store}>
 				<NavigationContainer>
+					
 					<Drawer.Navigator initialRouteName="Login">
 						<Drawer.Screen name="Home" component={Home} />
 						<Drawer.Screen

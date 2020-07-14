@@ -85,7 +85,7 @@ class Businesses extends Component {
 						round
 						searchIcon={{ size: 24 }}
 						onChangeText={this.updateSearch}
-						onSubmitEditing={(e) => this.fetchUsers(this.state.page)}
+						onSubmitEditing={(e) => this.fetchBizs(this.state.page)}
 						placeholder={"Search by keyword, city/state or zip"}
 						value={this.state.search}
 						inputContainerStyle={{ borderRadius: 16, backgroundColor: "black" }}
