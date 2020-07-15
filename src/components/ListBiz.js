@@ -15,6 +15,7 @@ import TextTicker from "react-native-text-ticker";
 import { connect } from "react-redux";
 const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
+import BizPage from "./BizPage.js";
 
 class ListBiz extends Component {
 	constructor(props) {
@@ -71,10 +72,19 @@ class ListBiz extends Component {
 						backgroundColor: "transparent",
 					}}
 				>
-					<Image
-						style={styles.img}
-						source={{ uri: this.props.biz.business.image_url }}
-					/>
+					<TouchableOpacity
+						onPress={() => {
+							this.props.navigation.navigate("BizPage", {
+								biz: this.props.biz,
+								
+							});
+						}}
+					>
+						<Image
+							style={styles.img}
+							source={{ uri: this.props.biz.business.image_url }}
+						/>
+					</TouchableOpacity>
 					<View
 						style={{
 							alignSelf: "flex-end",

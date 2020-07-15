@@ -3,12 +3,15 @@ import { Button, View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import Login from "./src/components/Login.js";
-import Home from "./src/components/Home.js";
+import Businesses from "./src/components/Businesses.js";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import isLoggedReducer from "./src/reducers/isLogged.js";
+import BizPage from "./src/components/BizPage.js";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const store = createStore(isLoggedReducer);
+const Stack = createStackNavigator();
 
 function NotificationsScreen({ navigation }) {
 	return (
@@ -19,9 +22,19 @@ function NotificationsScreen({ navigation }) {
 	);
 }
 
+function Home({ navigation }) {
+	return (
+		<Stack.Navigator>
+			<Stack.Screen name="Businesses" component={Businesses} />
+			<Stack.Screen name="BizPage" component={BizPage}  />
+		</Stack.Navigator>
+	);
+}
+
 const Drawer = createDrawerNavigator();
 
-export default class App extends React.Component {
+
+class App extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -29,7 +42,6 @@ export default class App extends React.Component {
 		return (
 			<Provider store={store}>
 				<NavigationContainer>
-					
 					<Drawer.Navigator initialRouteName="Login">
 						<Drawer.Screen name="Home" component={Home} />
 						<Drawer.Screen
@@ -43,3 +55,20 @@ export default class App extends React.Component {
 		);
 	}
 }
+
+export default App;
+
+
+// const mapNavigationStateParamsToProps = (SomeComponent) => {
+// 	return class extends Component {
+// 		static navigationOptions = SomeComponent.navigationOptions;
+// 		render() {
+// 			const {
+// 				navigation: {
+// 					state: { params },
+// 				},
+// 			} = this.props;
+// 			return <SomeComponent {...params} {...this.props} />;
+// 		}
+// 	};
+// };

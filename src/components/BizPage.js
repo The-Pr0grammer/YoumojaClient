@@ -28,6 +28,7 @@ class BizPage extends Component {
 	componentDidMount() {}
 
 	render() {
+		console.log(this.props.route.params);
 		return (
 			<View style={styles.cardView}>
 				<Card
@@ -43,7 +44,7 @@ class BizPage extends Component {
 				>
 					<Image
 						style={styles.img}
-						source={{ uri: this.props.biz.business.image_url }}
+						source={{ uri: this.props.route.params["biz"].business.image_url }}
 					/>
 					<View
 						style={{
@@ -211,7 +212,8 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 	},
 	img: {
-		flex: 2,
+		position:"absolute",
+		flex: 1,
 		marginLeft: vh(-1.7),
 		width: vw(65),
 		height: vh(30),

@@ -69,7 +69,6 @@ class Businesses extends Component {
 	};
 
 	render() {
-		console.log(this.state.userLikes);
 		return (
 			<View
 				style={{
@@ -105,7 +104,9 @@ class Businesses extends Component {
 					}}
 					data={this.state.businesses}
 					keyExtractor={(biz) => biz.id.toString()}
-					renderItem={({ item }) => <ListBiz biz={item} />}
+					renderItem={({ item }) => (
+						<ListBiz biz={item} navigation={this.props.navigation} />
+					)}
 				/>
 			</View>
 		);
