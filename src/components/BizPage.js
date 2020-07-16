@@ -15,11 +15,14 @@ import TextTicker from "react-native-text-ticker";
 import { connect } from "react-redux";
 const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
+import CommentList from "./CommentList.js";
 
 class BizPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			comments: [],
+			loading: false,
 			page: 1,
 			error: null,
 		};
@@ -122,68 +125,66 @@ class BizPage extends Component {
 						>
 							100
 						</Text>
-
-						<ScrollView
-							style={{
-								alignSelf: "flex-start",
-								backgroundColor: "orange",
-								width: vw(34.5),
-								height: vh(10),
-								position: "absolute",
-								top: vh(20),
-							}}
-							automaticallyAdjustInsets={false}
-							horizontal={true}
-							pagingEnabled={true}
-							scrollEnabled={true}
-							decelerationRate={0}
-							snapToAlignment={"center"}
-							snapToInterval={200}
-							scrollEventThrottle={16}
-							onScroll={(event) => {
-								var contentOffsetX = event.nativeEvent.contentOffset.x;
-								var contentOffsetY = event.nativeEvent.contentOffset.y;
-
-								var cellWidth = (DEVICE_WIDTH - 100).toFixed(2);
-								var cellHeight = (DEVICE_HEIGHT - 200).toFixed(2);
-
-								var cellIndex = Math.floor(contentOffsetX / cellWidth);
-
-								// Round to the next cell if the scrolling will stop over halfway to the next cell.
-								if (
-									contentOffsetX -
-										Math.floor(contentOffsetX / cellWidth) * cellWidth >
-									cellWidth
-								) {
-									cellIndex++;
-								}
-
-								// Adjust stopping point to exact beginning of cell.
-								contentOffsetX = cellIndex * cellWidth;
-								contentOffsetY = cellIndex * cellHeight;
-
-								event.nativeEvent.contentOffsetX = contentOffsetX;
-								event.nativeEvent.contentOffsetY = contentOffsetY;
-
-								// this.setState({contentOffsetX:contentOffsetX,contentOffsetY:contentOffsetY});
-								console.log("cellIndex:" + cellIndex);
-
-								console.log("contentOffsetX:" + contentOffsetX);
-								// contentOffset={{x:this.state.contentOffsetX,y:0}}
-							}}
-						>
-							<Image
-								source={require("../images/LOGO.png")}
-								style={styles.badge}
-							/>
-							<Image
-								source={require("../images/LOGO.png")}
-								style={styles.badge}
-							/>
-						</ScrollView>
 					</View>
 					{/* BADGES VIEW*/}
 				</Card>
+
+				<ScrollView
+					contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+					style={{
+						alignSelf: "flex-start",
+						backgroundColor: "black",
+						width: vw(100),
+						height: vh(8),
+						top: vh(30),
+						position: "absolute",
+					}}
+					automaticallyAdjustInsets={false}
+					horizontal={true}
+					pagingEnabled={true}
+					scrollEnabled={true}
+					decelerationRate={0}
+					snapToAlignment={"center"}
+					snapToInterval={200}
+					scrollEventThrottle={16}
+					onScroll={(event) => {
+						var contentOffsetX = event.nativeEvent.contentOffset.x;
+						var contentOffsetY = event.nativeEvent.contentOffset.y;
+
+						var cellWidth = (DEVICE_WIDTH - 100).toFixed(2);
+						var cellHeight = (DEVICE_HEIGHT - 200).toFixed(2);
+
+						var cellIndex = Math.floor(contentOffsetX / cellWidth);
+
+						// Round to the next cell if the scrolling will stop over halfway to the next cell.
+						if (
+							contentOffsetX -
+								Math.floor(contentOffsetX / cellWidth) * cellWidth >
+							cellWidth
+						) {
+							cellIndex++;
+						}
+
+						// Adjust stopping point to exact beginning of cell.
+						contentOffsetX = cellIndex * cellWidth;
+						contentOffsetY = cellIndex * cellHeight;
+
+						event.nativeEvent.contentOffsetX = contentOffsetX;
+						event.nativeEvent.contentOffsetY = contentOffsetY;
+
+						// this.setState({contentOffsetX:contentOffsetX,contentOffsetY:contentOffsetY});
+						console.log("cellIndex:" + cellIndex);
+
+						console.log("contentOffsetX:" + contentOffsetX);
+						// contentOffset={{x:this.state.contentOffsetX,y:0}}
+					}}
+				>
+					<Image source={require("../images/LOGO.png")} style={styles.badge} />
+					<Image source={require("../images/LOGO.png")} style={styles.badge} />
+				</ScrollView>
+
+				{/* <CommentList /> */}
+
 				<View styles={{ width: vw(100), backgroundColor: "red" }}>
 					{/* <TextTicker
                 duration={Math.random * 40000}
@@ -212,12 +213,17 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 	},
 	img: {
-		position:"absolute",
+		position: "absolute",
 		flex: 1,
 		marginLeft: vh(-1.7),
 		width: vw(65),
 		height: vh(30),
 		opacity: 1.0,
 		borderRadius: 2,
+	},
+	badge: {
+		top: "1%",
+		width: vw(16),
+		height: vh(7.1),
 	},
 });

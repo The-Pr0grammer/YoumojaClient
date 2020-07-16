@@ -82,12 +82,16 @@ class Businesses extends Component {
 				<View style={styles.searchDiv}>
 					<SearchBar
 						round
-						searchIcon={{ size: 24 }}
+						searchIcon={{ size: 18 }}
 						onChangeText={this.updateSearch}
 						onSubmitEditing={(e) => this.fetchBizs(this.state.page)}
-						placeholder={"Search by keyword, city/state or zip"}
+						placeholder={"Search by keyword or location"}
 						value={this.state.search}
-						inputContainerStyle={{ borderRadius: 16, backgroundColor: "black" }}
+						inputContainerStyle={{
+							borderRadius: 16,
+							backgroundColor: "black",
+							marginHorizontal: 12,
+						}}
 					/>
 				</View>
 				<ImageBackground
