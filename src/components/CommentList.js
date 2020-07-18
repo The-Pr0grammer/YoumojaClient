@@ -1,31 +1,37 @@
-// import { ScrollView, StyleSheet, Text, View } from 'react-native';
-// import PropTypes from 'prop-types';
-// import React from 'react';
+import { Flatlist, ScrollView, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import Comment from "./Comment.js";
+import { vw, vh, vmin, vmax } from "react-native-expo-viewport-units";
 
+export default class CommentList extends React.Component {
+	renderComments = (props) => {
+		return props.comments.map((comment) => (
+			<Comment key={comment.id} comment={comment} />
+		));
+	};
 
-// export default class CommentList extends React.Component {
-//     static propTypes = {
-//         items: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     };
+	render() {
+		console.log(this.props.comments);
+		return (
+			<ScrollView style={styles.commList}>
+				<View>{this.renderComments(this.props)}</View>
+			</ScrollView>
+		);
+	}
+}
 
-//     renderItem = (item, index) => (
-//         <View key={index} style={styles.comment}>
-//             <Text>{item}</Text>
-//         </View>
-//         );
-//         render() {
-//             const { items } = this.props;
+{
+	/* {this.props.comments.map((com) =>
+						this.renderItem(com.content, com.id)
+					)} */
+}
 
-//             return <ScrollView>{items.map(this.renderItem)}</ScrollView>;
-//         }
-// }
-
-// const styles = StyleSheet.create({
-//     comment: {
-//         marginLeft: 20,
-//         paddingVertical: 20,
-//         paddingRight: 20,
-//         borderBottomWidth: StyleSheet.hairlineWidth,
-//         borderBottomColor: 'rgba(0,0,0,0.05)',
-//     },
-// });
+const styles = StyleSheet.create({
+	commList: {
+		width: vw(100),
+        height: vh(53),
+        marginTop:vh(37.9),
+		backgroundColor: "green",
+		position: "absolute",
+	},
+});

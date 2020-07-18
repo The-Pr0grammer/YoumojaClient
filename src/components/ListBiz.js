@@ -12,10 +12,12 @@ import {
 import { Card, SearchBar, Icon } from "react-native-elements";
 import { vw, vh, vmin, vmax } from "react-native-expo-viewport-units";
 import TextTicker from "react-native-text-ticker";
-import { connect } from "react-redux";
 const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
 import BizPage from "./BizPage.js";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { getComments } from "../actions/commentsAction";
 
 class ListBiz extends Component {
 	constructor(props) {
@@ -76,7 +78,6 @@ class ListBiz extends Component {
 						onPress={() => {
 							this.props.navigation.navigate("BizPage", {
 								biz: this.props.biz,
-								
 							});
 						}}
 					>
@@ -91,7 +92,7 @@ class ListBiz extends Component {
 							left: vw(61.3),
 							position: "absolute",
 							height: vh(30),
-							width: vh(16.5),
+							width: vw(34.7),
 							backgroundColor: "black",
 							opacity: 0.5,
 						}}
@@ -159,7 +160,7 @@ class ListBiz extends Component {
 								width: 45,
 							}}
 						>
-							100
+							{this.props.biz.business.comments.length}
 						</Text>
 
 						<ScrollView
@@ -252,8 +253,8 @@ const styles = StyleSheet.create({
 	},
 	img: {
 		flex: 2,
-		marginLeft: vh(-1.7),
-		width: vw(65),
+		marginLeft: vw(-4.0),
+		width: vw(66),
 		height: vh(30),
 		opacity: 1.0,
 		borderRadius: 2,

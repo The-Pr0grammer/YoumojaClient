@@ -6,11 +6,11 @@ import Login from "./src/components/Login.js";
 import Businesses from "./src/components/Businesses.js";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import isLoggedReducer from "./src/reducers/isLogged.js";
 import BizPage from "./src/components/BizPage.js";
 import { createStackNavigator } from "@react-navigation/stack";
+import commentsReducer from "./src/reducers/commentsReducer.js";
 
-const store = createStore(isLoggedReducer);
+const store = createStore(commentsReducer);
 const Stack = createStackNavigator();
 
 function NotificationsScreen({ navigation }) {
@@ -24,15 +24,24 @@ function NotificationsScreen({ navigation }) {
 
 function Home({ navigation }) {
 	return (
-		<Stack.Navigator>
-			<Stack.Screen name="Businesses" component={Businesses} />
-			<Stack.Screen name="BizPage" component={BizPage}  />
+		<Stack.Navigator
+			screenOptions={{
+				headerStyle: {
+					backgroundColor: "#f4511e",
+				},
+				headerTintColor: "blue",
+				headerTitleStyle: {
+					fontWeight: "bold",
+				},
+			}}
+		>
+			<Stack.Screen name="Home" component={Businesses} />
+			<Stack.Screen name="BizPage" component={BizPage} />
 		</Stack.Navigator>
 	);
 }
 
 const Drawer = createDrawerNavigator();
-
 
 class App extends React.Component {
 	constructor(props) {
@@ -57,7 +66,6 @@ class App extends React.Component {
 }
 
 export default App;
-
 
 // const mapNavigationStateParamsToProps = (SomeComponent) => {
 // 	return class extends Component {

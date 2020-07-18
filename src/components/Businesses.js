@@ -13,10 +13,10 @@ import {
 import { Card, SearchBar, Icon } from "react-native-elements";
 import axios from "axios";
 import { vw, vh, vmin, vmax } from "react-native-expo-viewport-units";
-import { connect } from "react-redux";
 const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
 import ListBiz from "./ListBiz.js";
+import { connect } from "react-redux";
 
 class Businesses extends Component {
 	constructor(props) {
@@ -126,11 +126,11 @@ const styles = StyleSheet.create({
 		padding: 0,
 		borderWidth: 0,
 		width: "100%",
-		height: "110%",
+		height: vh(105),
 	},
 	list: {
 		// alignSelf: "auto",
-		marginTop: "40%",
+		marginTop: "30%",
 		position: "absolute",
 		opacity: 1.0,
 		height: "80%",
@@ -158,5 +158,5 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-	return { isLogged: state.isLogged };
+	return { commentsReducer: state.comments };
 }

@@ -31,7 +31,6 @@ class BizPage extends Component {
 	componentDidMount() {}
 
 	render() {
-		console.log(this.props.route.params);
 		return (
 			<View style={styles.cardView}>
 				<Card
@@ -65,7 +64,7 @@ class BizPage extends Component {
 								position: "absolute",
 								alignSelf: "center",
 								right: vw(12.5),
-								top: vw(3.5),
+								top: vh(2.5),
 								height: 37,
 								width: 45,
 							}}
@@ -83,7 +82,7 @@ class BizPage extends Component {
 								color: "gold",
 								fontWeight: "bold",
 								right: vw(12.5),
-								top: vh(6),
+								top: vh(5),
 								height: 37,
 								width: 45,
 							}}
@@ -123,7 +122,7 @@ class BizPage extends Component {
 								width: 45,
 							}}
 						>
-							100
+							{this.props.route.params["biz"].business.comments.length}
 						</Text>
 					</View>
 					{/* BADGES VIEW*/}
@@ -183,7 +182,9 @@ class BizPage extends Component {
 					<Image source={require("../images/LOGO.png")} style={styles.badge} />
 				</ScrollView>
 
-				{/* <CommentList /> */}
+				<CommentList
+					comments={this.props.route.params["biz"].business.comments}
+				/>
 
 				<View styles={{ width: vw(100), backgroundColor: "red" }}>
 					{/* <TextTicker
@@ -215,7 +216,7 @@ const styles = StyleSheet.create({
 	img: {
 		position: "absolute",
 		flex: 1,
-		marginLeft: vh(-1.7),
+		marginLeft: vw(-4.0),
 		width: vw(65),
 		height: vh(30),
 		opacity: 1.0,
