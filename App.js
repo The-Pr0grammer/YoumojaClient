@@ -32,6 +32,8 @@ function Home({ navigation }) {
 				headerTintColor: "blue",
 				headerTitleStyle: {
 					fontWeight: "bold",
+					fontFamily: "Marker Felt",
+					fontSize: 24,
 				},
 			}}
 		>

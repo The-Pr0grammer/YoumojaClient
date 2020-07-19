@@ -11,11 +11,22 @@ export default class CommentList extends React.Component {
 	};
 
 	render() {
-		console.log(this.props.comments);
+		// console.log(this.props.comments);
 		return (
-			<ScrollView style={styles.commList}>
-				<View>{this.renderComments(this.props)}</View>
-			</ScrollView>
+			<View style={styles.commList}>
+				<Text
+					style={{
+						textAlign: "center",
+						fontSize: 20,
+						fontFamily: "Marker Felt",
+					}}
+				>
+					COMMENTS({this.props.comments.length})
+				</Text>
+				<ScrollView>
+					<View>{this.renderComments(this.props)}</View>
+				</ScrollView>
+			</View>
 		);
 	}
 }
@@ -29,8 +40,8 @@ export default class CommentList extends React.Component {
 const styles = StyleSheet.create({
 	commList: {
 		width: vw(100),
-        height: vh(53),
-        marginTop:vh(37.9),
+		height: vh(53),
+		marginTop: vh(37.9),
 		backgroundColor: "green",
 		position: "absolute",
 	},
