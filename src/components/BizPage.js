@@ -28,35 +28,42 @@ class BizPage extends Component {
 		};
 	}
 
-	componentDidMount() {}
+	componentDidMount() {
+		return this.setState({
+			hearts: this.props.route.params["biz"].business.hearts,
+		});
+	}
 
 	render() {
 		return (
-			<View style={styles.cardView}>
-				<Card
-					containerStyle={{
-						width: vw(97),
-						padding: 0,
-						borderWidth: 0,
-						shadowOffset: { height: 0, width: 0 },
-						display: "flex",
-						flexDirection: "column",
-						backgroundColor: "transparent",
-					}}
-				>
+			<View style={{backgroundColor:"black"}}>
+				<View styles={{ width: vw(100), backgroundColor: "red" }}>
+					<TextTicker
+						duration={Math.random * 18000}
+						loop
+						bounce
+						repeatSpacer={25}
+						marqueeDelay={Math.random() * 1000}
+						style={styles.bizSumm}
+					>
+						mad random text cos this is just an example of a businesses
+						description !!!!!!! yeeeeeeeeeeee 🔥🤯♥️
+					</TextTicker>
+				</View>
+				<View style={styles.cardView}>
 					<Image
 						style={styles.img}
-						source={{ uri: this.props.route.params["biz"].business.image_url }}
+						source={{
+							uri: this.props.route.params["biz"].business.image_url,
+						}}
 					/>
 					<View
 						style={{
-							alignSelf: "flex-end",
-							left: vw(61.3),
-							position: "absolute",
+							backgroundColor: "purple",
+							width: vw(35),
 							height: vh(30),
-							width: vh(16.5),
-							backgroundColor: "black",
-							opacity: 0.5,
+							alignSelf: "flex-end",
+							position: "absolute",
 						}}
 					>
 						<TouchableOpacity
@@ -64,7 +71,7 @@ class BizPage extends Component {
 								position: "absolute",
 								alignSelf: "center",
 								right: vw(12.5),
-								top: vh(2.5),
+								top: vw(3.5),
 								height: 37,
 								width: 45,
 							}}
@@ -82,61 +89,101 @@ class BizPage extends Component {
 								color: "gold",
 								fontWeight: "bold",
 								right: vw(12.5),
-								top: vh(5),
+								top: vh(7),
 								height: 37,
 								width: 45,
 							}}
 						>
 							{this.state.hearts}
 						</Text>
-						{/* COMMENTS ICON */}
+
 						<TouchableOpacity
 							style={{
 								position: "absolute",
-								alignSelf: "center",
-								right: vw(12.5),
-								top: vh(11),
+								alignSelf: "flex-start",
+								top: vh(13.5),
+								height: 37,
+								width: 45,
+								marginHorizontal: "3%",
+							}}
+							onPress={() => {
+								this.incHearts();
+							}}
+						>
+							<Icon name="twitter" type="feather" color="red" size={37} />
+						</TouchableOpacity>
+
+						<TouchableOpacity
+							style={{
+								position: "absolute",
+								alignSelf: "flex-end",
+								top: vh(13.5),
 								height: 37,
 								width: 45,
 							}}
-							onPress={() => {}}
+							onPress={() => {
+								this.incHearts();
+							}}
 						>
 							<Icon
-								name="chat"
-								type="materialcommunityicons"
-								color="green"
-								size={37}
+								name="facebook-box"
+								type="material-community"
+								color="red"
+								size={40}
 							/>
 						</TouchableOpacity>
 
-						<Text
+						<TouchableOpacity
 							style={{
 								position: "absolute",
-								textAlign: "center",
-								fontSize: 25,
-								color: "gold",
-								fontWeight: "bold",
+								alignSelf: "flex-end",
+								top: vh(23),
 								right: vw(12.5),
-								top: vh(15),
 								height: 37,
 								width: 45,
 							}}
+							onPress={() => {
+								this.incHearts();
+							}}
 						>
-							{this.props.route.params["biz"].business.comments.length}
-						</Text>
+							<Icon name="phone-call" type="feather" color="red" size={40} />
+						</TouchableOpacity>
 					</View>
-					{/* BADGES VIEW*/}
-				</Card>
+				</View>
+				{/* BADGES VIEW*/}
+				<TouchableOpacity
+					style={{ borderRadius: 20, backgroundColor: "salmon" }}
+				>
+					<Text
+						style={{
+							width: vw(34),
+							height: vh(8),
+							backgroundColor: "salmon",
+							position: "absolute",
+							top: vh(30),
+							fontSize: 24,
+							textAlign: "center",
+							fontFamily: "PartyLetPlain",
+							lineHeight: 50,
+						}}
+					>
+						SUPPORT
+					</Text>
+				</TouchableOpacity>
 
 				<ScrollView
-					contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+					contentContainerStyle={{
+						flexGrow: 1,
+						justifyContent: "flex-start",
+					}}
 					style={{
-						alignSelf: "flex-start",
 						backgroundColor: "black",
-						width: vw(100),
+						width: vw(66),
 						height: vh(8),
 						top: vh(30),
-						position: "absolute",
+						// left:vw(1),
+						position: "relative",
+						alignSelf: "flex-end",
 					}}
 					automaticallyAdjustInsets={false}
 					horizontal={true}
@@ -180,24 +227,13 @@ class BizPage extends Component {
 				>
 					<Image source={require("../images/LOGO.png")} style={styles.badge} />
 					<Image source={require("../images/LOGO.png")} style={styles.badge} />
+					<Image source={require("../images/LOGO.png")} style={styles.badge} />
+					<Image source={require("../images/LOGO.png")} style={styles.badge} />
 				</ScrollView>
-
-				<CommentList
-					comments={this.props.route.params["biz"].business.comments}
-				/>
-
-				<View styles={{ width: vw(100), backgroundColor: "red" }}>
-					{/* <TextTicker
-                duration={Math.random * 40000}
-                loop
-                bounce
-                repeatSpacer={0}
-                marqueeDelay={Math.random() * 2000}
-                style={styles.cardText}
-            >
-                made random text cos this is just an example of a businesses
-                description !!!!!!! yeeeeeeeeeeee 🔥🤯♥️
-            </TextTicker> */}
+				<View style={{ position: "relative" }}>
+					<CommentList
+						comments={this.props.route.params["biz"].business.comments}
+					/>
 				</View>
 			</View>
 		);
@@ -207,24 +243,27 @@ class BizPage extends Component {
 export default BizPage;
 
 const styles = StyleSheet.create({
-	cardView: {
-		marginTop: vh(-0.5),
-		padding: 0,
-		display: "flex",
-		flexDirection: "row",
-	},
 	img: {
 		position: "absolute",
 		flex: 1,
-		marginLeft: vw(-4.0),
 		width: vw(65),
 		height: vh(30),
 		opacity: 1.0,
-		borderRadius: 2,
+		alignSelf: "flex-start",
 	},
 	badge: {
 		top: "1%",
 		width: vw(16),
 		height: vh(7.1),
+	},
+	cardView: {
+		flex: 1,
+		flexDirection: "column",
+	},
+	bizSumm: {
+		position: "relative",
+		fontSize: 42,
+		backgroundColor: "black",
+		color:"aqua"
 	},
 });

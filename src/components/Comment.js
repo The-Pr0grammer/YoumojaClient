@@ -4,9 +4,7 @@ import { vw, vh, vmin, vmax } from "react-native-expo-viewport-units";
 
 export default class Comment extends React.Component {
 	render() {
-		const ts = new Date(this.props.comment.created_at).format(
-			"MM/DD/YYYY hh:MM"
-		);
+		const ts = new Date(this.props.comment.created_at);
 		console.log("comdsdment", ts);
 		return (
 			<View style={styles.commentCon}>
@@ -39,13 +37,15 @@ const styles = StyleSheet.create({
 		backgroundColor: "blue",
 		borderWidth: 0.5,
 		borderColor: "purple",
+		
 	},
 	comment: {
 		alignSelf: "flex-start",
 		fontFamily: "Marker Felt",
-		fontSize: 18,
+		fontSize: 24,
 		marginTop: vh(1),
 		marginLeft: vh(0.7),
+		fontFamily: "Papyrus",
 	},
 	username: {
 		position: "relative",

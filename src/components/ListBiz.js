@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import { Card, SearchBar, Icon } from "react-native-elements";
 import { vw, vh, vmin, vmax } from "react-native-expo-viewport-units";
-import TextTicker from "react-native-text-ticker";
 const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
 import BizPage from "./BizPage.js";
@@ -102,7 +101,7 @@ class ListBiz extends Component {
 								position: "absolute",
 								alignSelf: "center",
 								right: vw(12.5),
-								top: vw(3.5),
+								top: vh(1),
 								height: 37,
 								width: 45,
 							}}
