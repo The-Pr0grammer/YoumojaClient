@@ -9,8 +9,16 @@ import React from "react";
 import Comment from "./Comment.js";
 import { vw, vh, vmin, vmax } from "react-native-expo-viewport-units";
 import { Icon } from "react-native-elements";
+import NewComment from "./NewComment.js";
 
 export default class CommentList extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			newCommentTogg: false,
+		};
+	}
+
 	renderComments = (props) => {
 		return props.comments.map((comment) => (
 			<Comment key={comment.id} comment={comment} />
@@ -52,6 +60,9 @@ export default class CommentList extends React.Component {
 						style={styles.add}
 					/>
 				</TouchableOpacity>
+				<View>
+<NewComment/>
+				</View>
 				<ScrollView>
 					<View>{this.renderComments(this.props)}</View>
 				</ScrollView>

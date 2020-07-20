@@ -25,6 +25,7 @@ class BizPage extends Component {
 			loading: false,
 			page: 1,
 			error: null,
+			newCommentTogg: false,
 		};
 	}
 
@@ -36,8 +37,8 @@ class BizPage extends Component {
 
 	render() {
 		return (
-			<View style={{backgroundColor:"black"}}>
-				<View styles={{ width: vw(100), backgroundColor: "red" }}>
+			<View style={{ backgroundColor: "black" }}>
+				<View styles={{ width: vw(100), backgroundColor: "lime" }}>
 					<TextTicker
 						duration={Math.random * 18000}
 						loop
@@ -60,18 +61,18 @@ class BizPage extends Component {
 					<View
 						style={{
 							backgroundColor: "purple",
-							width: vw(35),
+							width: vw(40),
 							height: vh(30),
 							alignSelf: "flex-end",
 							position: "absolute",
+							zIndex: 1,
 						}}
 					>
 						<TouchableOpacity
 							style={{
 								position: "absolute",
 								alignSelf: "center",
-								right: vw(12.5),
-								top: vw(3.5),
+								top: vh(11),
 								height: 37,
 								width: 45,
 							}}
@@ -79,7 +80,7 @@ class BizPage extends Component {
 								this.incHearts();
 							}}
 						>
-							<Icon name="heart" type="feather" color="red" size={37} />
+							<Icon name="heart" type="feather" color="red" size={35} />
 						</TouchableOpacity>
 						<Text
 							style={{
@@ -88,10 +89,10 @@ class BizPage extends Component {
 								fontSize: 25,
 								color: "gold",
 								fontWeight: "bold",
-								right: vw(12.5),
-								top: vh(7),
-								height: 37,
-								width: 45,
+								top: vh(16),
+								height: vh(10),
+								width: vw(10),
+								alignSelf: "center",
 							}}
 						>
 							{this.state.hearts}
@@ -101,25 +102,41 @@ class BizPage extends Component {
 							style={{
 								position: "absolute",
 								alignSelf: "flex-start",
-								top: vh(13.5),
-								height: 37,
-								width: 45,
-								marginHorizontal: "3%",
+								height: vh(5),
+								width: vw(13),
+								marginHorizontal: "2%",
+								marginVertical: "4%",
 							}}
 							onPress={() => {
 								this.incHearts();
 							}}
 						>
-							<Icon name="twitter" type="feather" color="red" size={37} />
+							<Icon name="twitter" type="feather" color="red" size={35} />
 						</TouchableOpacity>
 
 						<TouchableOpacity
 							style={{
 								position: "absolute",
 								alignSelf: "flex-end",
-								top: vh(13.5),
-								height: 37,
-								width: 45,
+								top: vh(23.5),
+								height: vh(5),
+								width: vw(13),
+								marginHorizontal: "2%",
+							}}
+							onPress={() => {
+								this.incHearts();
+							}}
+						>
+							<Icon name="phone-call" type="feather" color="red" size={34} />
+						</TouchableOpacity>
+
+						<TouchableOpacity
+							style={{
+								position: "absolute",
+								alignSelf: "flex-end",
+								height: vh(5),
+								width: vw(13),
+								marginVertical: "4%",
 							}}
 							onPress={() => {
 								this.incHearts();
@@ -129,107 +146,144 @@ class BizPage extends Component {
 								name="facebook-box"
 								type="material-community"
 								color="red"
-								size={40}
+								size={38}
 							/>
 						</TouchableOpacity>
 
 						<TouchableOpacity
 							style={{
 								position: "absolute",
-								alignSelf: "flex-end",
-								top: vh(23),
-								right: vw(12.5),
-								height: 37,
-								width: 45,
+								alignSelf: "flex-start",
+								top: vh(23.5),
+								height: vh(5),
+								width: vw(13),
+								marginHorizontal: "2%",
 							}}
 							onPress={() => {
 								this.incHearts();
 							}}
 						>
-							<Icon name="phone-call" type="feather" color="red" size={40} />
+							<Icon name="laptop" type="entypo" color="red" size={35} />
 						</TouchableOpacity>
 					</View>
 				</View>
-				{/* BADGES VIEW*/}
-				<TouchableOpacity
-					style={{ borderRadius: 20, backgroundColor: "salmon" }}
-				>
-					<Text
+				<View style={{ zIndex: 1 }}>
+					<TouchableOpacity
+						style={{ borderRadius: 20, backgroundColor: "salmon" }}
+					>
+						<Text
+							style={{
+								width: vw(34),
+								height: vh(8),
+								backgroundColor: "salmon",
+								position: "absolute",
+								top: vh(30),
+								fontSize: 24,
+								textAlign: "center",
+								fontFamily: "PartyLetPlain",
+								lineHeight: 50,
+							}}
+						>
+							SUPPORT
+						</Text>
+					</TouchableOpacity>
+
+					<ScrollView
+						contentContainerStyle={{
+							flexGrow: 1,
+							justifyContent: "flex-start",
+							paddingHorizontal: vw(1),
+						}}
 						style={{
-							width: vw(34),
+							backgroundColor: "black",
+							width: vw(66),
 							height: vh(8),
-							backgroundColor: "salmon",
-							position: "absolute",
 							top: vh(30),
-							fontSize: 24,
-							textAlign: "center",
-							fontFamily: "PartyLetPlain",
-							lineHeight: 50,
+							position: "relative",
+							alignSelf: "flex-end",
+						}}
+						automaticallyAdjustInsets={false}
+						horizontal={true}
+						pagingEnabled={true}
+						scrollEnabled={true}
+						decelerationRate={0}
+						snapToAlignment={"center"}
+						snapToInterval={20}
+						scrollEventThrottle={5}
+						onScroll={(event) => {
+							var contentOffsetX = event.nativeEvent.contentOffset.x;
+							var contentOffsetY = event.nativeEvent.contentOffset.y;
+
+							var cellWidth = (DEVICE_WIDTH - 100).toFixed(2);
+							var cellHeight = (DEVICE_HEIGHT - 200).toFixed(2);
+
+							var cellIndex = Math.floor(contentOffsetX / cellWidth);
+
+							// Round to the next cell if the scrolling will stop over halfway to the next cell.
+							if (
+								contentOffsetX -
+									Math.floor(contentOffsetX / cellWidth) * cellWidth >
+								cellWidth
+							) {
+								cellIndex++;
+							}
+
+							// Adjust stopping point to exact beginning of cell.
+							contentOffsetX = cellIndex * cellWidth;
+							contentOffsetY = cellIndex * cellHeight;
+
+							event.nativeEvent.contentOffsetX = contentOffsetX;
+							event.nativeEvent.contentOffsetY = contentOffsetY;
+
+							// this.setState({contentOffsetX:contentOffsetX,contentOffsetY:contentOffsetY});
+							console.log("cellIndex:" + cellIndex);
+
+							console.log("contentOffsetX:" + contentOffsetX);
+							// contentOffset={{x:this.state.contentOffsetX,y:0}}
 						}}
 					>
-						SUPPORT
-					</Text>
-				</TouchableOpacity>
-
-				<ScrollView
-					contentContainerStyle={{
-						flexGrow: 1,
-						justifyContent: "flex-start",
-					}}
-					style={{
-						backgroundColor: "black",
-						width: vw(66),
-						height: vh(8),
-						top: vh(30),
-						// left:vw(1),
-						position: "relative",
-						alignSelf: "flex-end",
-					}}
-					automaticallyAdjustInsets={false}
-					horizontal={true}
-					pagingEnabled={true}
-					scrollEnabled={true}
-					decelerationRate={0}
-					snapToAlignment={"center"}
-					snapToInterval={200}
-					scrollEventThrottle={16}
-					onScroll={(event) => {
-						var contentOffsetX = event.nativeEvent.contentOffset.x;
-						var contentOffsetY = event.nativeEvent.contentOffset.y;
-
-						var cellWidth = (DEVICE_WIDTH - 100).toFixed(2);
-						var cellHeight = (DEVICE_HEIGHT - 200).toFixed(2);
-
-						var cellIndex = Math.floor(contentOffsetX / cellWidth);
-
-						// Round to the next cell if the scrolling will stop over halfway to the next cell.
-						if (
-							contentOffsetX -
-								Math.floor(contentOffsetX / cellWidth) * cellWidth >
-							cellWidth
-						) {
-							cellIndex++;
-						}
-
-						// Adjust stopping point to exact beginning of cell.
-						contentOffsetX = cellIndex * cellWidth;
-						contentOffsetY = cellIndex * cellHeight;
-
-						event.nativeEvent.contentOffsetX = contentOffsetX;
-						event.nativeEvent.contentOffsetY = contentOffsetY;
-
-						// this.setState({contentOffsetX:contentOffsetX,contentOffsetY:contentOffsetY});
-						console.log("cellIndex:" + cellIndex);
-
-						console.log("contentOffsetX:" + contentOffsetX);
-						// contentOffset={{x:this.state.contentOffsetX,y:0}}
-					}}
-				>
-					<Image source={require("../images/LOGO.png")} style={styles.badge} />
-					<Image source={require("../images/LOGO.png")} style={styles.badge} />
-					<Image source={require("../images/LOGO.png")} style={styles.badge} />
-					<Image source={require("../images/LOGO.png")} style={styles.badge} />
-				</ScrollView>
+						<Image
+							source={require("../images/LOGO.png")}
+							style={styles.badge}
+						/>
+						<Image
+							source={require("../images/LOGO.png")}
+							style={styles.badge}
+						/>
+						<Image
+							source={require("../images/LOGO.png")}
+							style={styles.badge}
+						/>
+						<Image
+							source={require("../images/LOGO.png")}
+							style={styles.badge}
+						/>
+						<Image
+							source={require("../images/LOGO.png")}
+							style={styles.badge}
+						/>
+						<Image
+							source={require("../images/LOGO.png")}
+							style={styles.badge}
+						/>
+						<Image
+							source={require("../images/LOGO.png")}
+							style={styles.badge}
+						/>
+						<Image
+							source={require("../images/LOGO.png")}
+							style={styles.badge}
+						/>
+						<Image
+							source={require("../images/LOGO.png")}
+							style={styles.badge}
+						/>
+						<Image
+							source={require("../images/LOGO.png")}
+							style={styles.badge}
+						/>
+					</ScrollView>
+				</View>
 				<View style={{ position: "relative" }}>
 					<CommentList
 						comments={this.props.route.params["biz"].business.comments}
@@ -246,24 +300,25 @@ const styles = StyleSheet.create({
 	img: {
 		position: "absolute",
 		flex: 1,
-		width: vw(65),
+		width: vw(60),
 		height: vh(30),
 		opacity: 1.0,
 		alignSelf: "flex-start",
 	},
 	badge: {
-		top: "1%",
+		marginVertical: vh(0.5),
 		width: vw(16),
 		height: vh(7.1),
 	},
 	cardView: {
 		flex: 1,
 		flexDirection: "column",
+		zIndex: 1,
 	},
 	bizSumm: {
 		position: "relative",
-		fontSize: 42,
+		fontSize: 38,
 		backgroundColor: "black",
-		color:"aqua"
+		color: "aqua",
 	},
 });

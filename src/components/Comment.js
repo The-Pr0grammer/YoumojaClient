@@ -29,15 +29,15 @@ export default class Comment extends React.Component {
 const styles = StyleSheet.create({
 	commentCon: {
 		flex: 1,
-		marginVertical: 8,
-		marginHorizontal: 11,
+		marginVertical: 7,
+		marginHorizontal: 10,
 		paddingVertical: vh(1.5),
 		paddingRight: 20,
 		marginBottom: vh(1),
 		backgroundColor: "blue",
 		borderWidth: 0.5,
 		borderColor: "purple",
-		
+		borderRadius: 8,
 	},
 	comment: {
 		alignSelf: "flex-start",
@@ -53,6 +53,8 @@ const styles = StyleSheet.create({
 		alignSelf: "flex-end",
 		marginVertical: 1,
 		marginLeft: vw(1.5),
+		fontFamily: "Georgia",
+		fontSize: 15,
 	},
 	profilePic: {
 		// zIndex: 1,

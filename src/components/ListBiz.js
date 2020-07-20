@@ -100,10 +100,9 @@ class ListBiz extends Component {
 							style={{
 								position: "absolute",
 								alignSelf: "center",
-								right: vw(12.5),
 								top: vh(1),
-								height: 37,
-								width: 45,
+								height: vh(5),
+								width: vw(13),
 							}}
 							onPress={() => {
 								this.incHearts();
@@ -118,10 +117,10 @@ class ListBiz extends Component {
 								fontSize: 25,
 								color: "gold",
 								fontWeight: "bold",
-								right: vw(12.5),
 								top: vh(6),
-								height: 37,
-								width: 45,
+								height: vh(5),
+								width: vw(13),
+								alignSelf: "center",
 							}}
 						>
 							{this.state.hearts}
@@ -131,10 +130,9 @@ class ListBiz extends Component {
 							style={{
 								position: "absolute",
 								alignSelf: "center",
-								right: vw(12.5),
 								top: vh(11),
-								height: 37,
-								width: 45,
+								height: vh(5),
+								width: vw(13),
 							}}
 							onPress={() => {}}
 						>
@@ -153,10 +151,10 @@ class ListBiz extends Component {
 								fontSize: 25,
 								color: "gold",
 								fontWeight: "bold",
-								right: vw(12.5),
 								top: vh(15),
-								height: 37,
-								width: 45,
+								height: vh(5),
+								width: vw(13),
+								alignSelf: "center",
 							}}
 						>
 							{this.props.biz.business.comments.length}
