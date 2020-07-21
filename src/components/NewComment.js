@@ -7,6 +7,7 @@ import {
 import PropTypes from "prop-types";
 import React from "react";
 import { vh } from "react-native-expo-viewport-units";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default class CommentInput extends React.Component {
 	static propTypes = {
@@ -36,7 +37,7 @@ export default class CommentInput extends React.Component {
 		const { text } = this.state;
 
 		return (
-			<KeyboardAvoidingView behavior="padding" style={styles.container}>
+			<View style={styles.container}>
 				<TextInput
 					style={styles.input}
 					value={text}
@@ -48,7 +49,7 @@ export default class CommentInput extends React.Component {
 					textAlign={"center"}
 					borderRadius={8}
 				/>
-			</KeyboardAvoidingView>
+			</View>
 		);
 	}
 }
@@ -60,9 +61,11 @@ const styles = StyleSheet.create({
 		borderBottomColor: "rgba(0,0,0,0.1)",
 		paddingHorizontal: 10,
 		marginTop: vh(1.5),
-		marginBottom: vh(1),
-		height: vh(15),
+		marginBottom: vh(0.5),
+		height: vh(9),
 		position: "relative",
+		zIndex: 1,
+		backgroundColor: "red"
 	},
-	input: { height: vh(15) },
+	input: { height: vh(9) },
 });

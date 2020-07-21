@@ -4,12 +4,14 @@ import {
 	Text,
 	View,
 	TouchableOpacity,
+	KeyboardAvoidingView,
 } from "react-native";
 import React from "react";
 import Comment from "./Comment.js";
 import { vw, vh, vmin, vmax } from "react-native-expo-viewport-units";
 import { Icon } from "react-native-elements";
 import NewComment from "./NewComment.js";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default class CommentList extends React.Component {
 	constructor(props) {
@@ -61,7 +63,7 @@ export default class CommentList extends React.Component {
 					/>
 				</TouchableOpacity>
 				<View>
-<NewComment/>
+					<NewComment />
 				</View>
 				<ScrollView>
 					<View>{this.renderComments(this.props)}</View>
@@ -79,11 +81,14 @@ export default class CommentList extends React.Component {
 
 const styles = StyleSheet.create({
 	commList: {
+		flex: 1,
 		width: vw(100),
 		height: vh(53),
 		marginTop: vh(30),
 		backgroundColor: "green",
 		flexDirection: "column",
+		position: "absolute",
+		// paddingBottom: 500,
 	},
 	add: {
 		// backgroundColor: "pink",
