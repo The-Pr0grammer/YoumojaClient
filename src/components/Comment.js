@@ -5,7 +5,7 @@ import { vw, vh, vmin, vmax } from "react-native-expo-viewport-units";
 export default class Comment extends React.Component {
 	render() {
 		const ts = new Date(this.props.comment.created_at);
-		console.log("comdsdment", ts);
+		// console.log("comdsdment", ts);
 		return (
 			<View style={styles.commentCon}>
 				<View style={{ flexDirection: "row" }}>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "blue",
 		borderWidth: 0.5,
 		borderColor: "purple",
-		borderRadius: 8,
+		borderRadius: 3,
 	},
 	comment: {
 		alignSelf: "flex-start",

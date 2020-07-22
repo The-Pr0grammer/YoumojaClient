@@ -27,6 +27,10 @@ export default class CommentList extends React.Component {
 		));
 	};
 
+	handleCancel = () => {
+		this.setState({ newCommentTogg: false });
+	};
+
 	render() {
 		// console.log(this.props.comments);
 		return (
@@ -43,27 +47,31 @@ export default class CommentList extends React.Component {
 				>
 					COMMENTS({this.props.comments.length})
 				</Text>
-				<TouchableOpacity
-					style={{
-						position: "relative",
-						alignSelf: "center",
-						height: 37,
-						width: 45,
-					}}
-					onPress={() => {
-						this.incHearts();
-					}}
-				>
-					<Icon
-						name="plus-circle"
-						type="feather"
-						color="aqua"
-						size={37}
-						style={styles.add}
-					/>
-				</TouchableOpacity>
+				{this.state.newCommentTogg == false && (
+					<TouchableOpacity
+						style={{
+							position: "relative",
+							alignSelf: "center",
+							height: 37,
+							width: 45,
+						}}
+						onPress={() => {
+							this.setState({ newCommentTogg: true });
+						}}
+					>
+						<Icon
+							name="plus-circle"
+							type="feather"
+							color="aqua"
+							size={37}
+							style={styles.add}
+						/>
+					</TouchableOpacity>
+				)}
 				<View>
-					<NewComment />
+					{this.state.newCommentTogg && (
+						<NewComment handleCancel={this.handleCancel} />
+					)}
 				</View>
 				<ScrollView>
 					<View>{this.renderComments(this.props)}</View>
@@ -83,7 +91,7 @@ const styles = StyleSheet.create({
 	commList: {
 		flex: 1,
 		width: vw(100),
-		height: vh(53),
+		height: vh(100),
 		marginTop: vh(30),
 		backgroundColor: "green",
 		flexDirection: "column",

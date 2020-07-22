@@ -2,13 +2,13 @@ import {
 	StyleSheet,
 	TextInput,
 	View,
-	KeyboardAvoidingView,
+	TouchableOpacity,
+	Text,
 } from "react-native";
 import PropTypes from "prop-types";
 import React from "react";
-import { vh } from "react-native-expo-viewport-units";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
+import { vh, vw } from "react-native-expo-viewport-units";
+import { Button, Icon } from "react-native-elements";
 export default class CommentInput extends React.Component {
 	static propTypes = {
 		onSubmit: PropTypes.func.isRequired,
@@ -35,7 +35,7 @@ export default class CommentInput extends React.Component {
 
 	render() {
 		const { text } = this.state;
-
+		console.log(this.state.text);
 		return (
 			<View style={styles.container}>
 				<TextInput
@@ -47,8 +47,82 @@ export default class CommentInput extends React.Component {
 					fontSize={20}
 					backgroundColor={"silver"}
 					textAlign={"center"}
-					borderRadius={8}
+					borderRadius={7}
 				/>
+				<View
+					style={{
+						zIndex: 1,
+						flexDirection: "row",
+					}}
+				>
+					<TouchableOpacity
+						style={{
+							position: "relative",
+							height: vh(6.5),
+							width: vw(30),
+							backgroundColor: "maroon",
+							borderRadius: 30,
+							marginVertical: vh(1),
+							flexDirection: "row",
+							alignItems: "center",
+							justifyContent: "center",
+							marginLeft: vw(5),
+						}}
+						onPress={() => {
+							this.props.handleCancel();
+						}}
+					>
+						<Text
+							style={{
+								fontSize: 18,
+								textAlignVertical: "center",
+							}}
+						>
+							CANCEL
+						</Text>
+						<Icon
+							name="cancel"
+							type="materialcommunityicons"
+							color="black"
+							size={35}
+							style={{ alignSelf: "flex-end" }}
+						/>
+					</TouchableOpacity>
+
+					<TouchableOpacity
+						style={{
+							position: "relative",
+							height: vh(6.5),
+							width: vw(30),
+							backgroundColor: "lime",
+							borderRadius: 30,
+							marginVertical: vh(1),
+							flexDirection: "row",
+							alignItems: "center",
+							justifyContent: "center",
+							marginLeft: vw(24.5),
+						}}
+						onPress={() => {
+							this.props.handleSubmit();
+						}}
+					>
+						<Text
+							style={{
+								fontSize: 18,
+								textAlignVertical: "center",
+							}}
+						>
+							POST
+						</Text>
+						<Icon
+							name="comment"
+							type="materialcommunityicons"
+							color="black"
+							size={35}
+							style={{ alignSelf: "flex-end" }}
+						/>
+					</TouchableOpacity>
+				</View>
 			</View>
 		);
 	}
@@ -56,16 +130,14 @@ export default class CommentInput extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-		// flex: 1,
-		borderBottomWidth: StyleSheet.hairlineWidth,
-		borderBottomColor: "rgba(0,0,0,0.1)",
 		paddingHorizontal: 10,
+		paddingVertical: 8,
 		marginTop: vh(1.5),
 		marginBottom: vh(0.5),
-		height: vh(9),
+		height: vh(20),
 		position: "relative",
 		zIndex: 1,
-		backgroundColor: "red"
+		backgroundColor: "orange",
 	},
-	input: { height: vh(9) },
+	input: { height: vh(10) },
 });

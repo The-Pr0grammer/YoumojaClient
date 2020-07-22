@@ -9,6 +9,7 @@ import {
 	TouchableOpacity,
 	Dimensions,
 	KeyboardAvoidingView,
+	Keyboard,
 } from "react-native";
 import { Card, SearchBar, Icon } from "react-native-elements";
 import { vw, vh, vmin, vmax } from "react-native-expo-viewport-units";
@@ -18,6 +19,7 @@ const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
 import CommentList from "./CommentList.js";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import KeyboardShift from "./KeyboardShift.js";
 
 class BizPage extends Component {
 	constructor(props) {
@@ -39,16 +41,8 @@ class BizPage extends Component {
 
 	render() {
 		return (
-			<ScrollView
-				keyboardShouldPersistTaps="handled"
-				showsVerticalScrollIndicator={false}
-			>
-				<KeyboardAvoidingView
-					behavior={"padding"}
-					keyboardVerticalOffset={-64}
-					enabled
-					style={{flex:1}}
-				>
+			<KeyboardShift>
+				{() => (
 					<View style={{ backgroundColor: "black" }}>
 						<View styles={{ width: vw(100), backgroundColor: "lime" }}>
 							<TextTicker
@@ -307,8 +301,8 @@ class BizPage extends Component {
 							/>
 						</View>
 					</View>
-				</KeyboardAvoidingView>
-			</ScrollView>
+				)}
+			</KeyboardShift>
 		);
 	}
 }
