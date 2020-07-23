@@ -5,16 +5,12 @@ import {
 	TouchableOpacity,
 	Text,
 } from "react-native";
-import PropTypes from "prop-types";
 import React from "react";
 import { vh, vw } from "react-native-expo-viewport-units";
 import { Button, Icon } from "react-native-elements";
-export default class CommentInput extends React.Component {
-	static propTypes = {
-		onSubmit: PropTypes.func.isRequired,
-		placeholder: PropTypes.string,
-	};
+import axios from "axios";
 
+export default class CommentInput extends React.Component {
 	state = {
 		text: "",
 	};
@@ -23,19 +19,26 @@ export default class CommentInput extends React.Component {
 		this.setState({ text });
 	};
 
-	handleSubmitEditing = () => {
-		const { onSubmit } = this.props;
-		const { text } = this.state;
-
-		if (!text) return;
-
-		onSubmit(text);
-		this.setState({ text: "" });
+	handleSubmit = () => {
+		if (!this.state.text) return;
+		axios
+			.post(`http://localhost:3000/comments`, {
+				user_id: 1,
+				business_id: this.props.bizId,
+				content: this.state.text,
+			})
+			.then(function (response) {
+				this.props.handleCancel();
+				this.setState({ text: "" });
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	};
 
 	render() {
 		const { text } = this.state;
-		console.log(this.state.text);
+		console.log(this.props.bizId);
 		return (
 			<View style={styles.container}>
 				<TextInput
@@ -43,11 +46,17 @@ export default class CommentInput extends React.Component {
 					value={text}
 					placeholder="Say something 🗣..."
 					onChangeText={this.handleChangeText}
-					onSubmitEditing={this.handleSubmitEditing}
+					// onSubmitEditing={this.handleSubmit}
 					fontSize={20}
 					backgroundColor={"silver"}
 					textAlign={"center"}
 					borderRadius={7}
+					multiline={true}
+					scrollEnabled={true}
+					spellCheck={true}
+					inlineImagePadding={5}
+					keyboardAppearance={"dark"}
+					number={280}
 				/>
 				<View
 					style={{
@@ -103,7 +112,7 @@ export default class CommentInput extends React.Component {
 							marginLeft: vw(24.5),
 						}}
 						onPress={() => {
-							this.props.handleSubmit();
+							this.handleSubmit();
 						}}
 					>
 						<Text

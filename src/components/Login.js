@@ -64,6 +64,7 @@ class Login extends React.Component {
 						clearTextOnFocus={true}
 						defaultValue="password"
 						style={styles.input}
+						secureTextEntry={true}
 					/>
 					<Button
 						buttonStyle={{ backgroundColor: "black", borderRadius: 18 }}
@@ -84,7 +85,7 @@ class Login extends React.Component {
 		);
 	}
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 const styles = StyleSheet.create({
 	container: {

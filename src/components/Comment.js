@@ -40,9 +40,10 @@ const styles = StyleSheet.create({
 		borderRadius: 3,
 	},
 	comment: {
+		flex: 1,
 		alignSelf: "flex-start",
 		fontFamily: "Marker Felt",
-		fontSize: 24,
+		fontSize: 21,
 		marginTop: vh(1),
 		marginLeft: vh(0.7),
 		fontFamily: "Papyrus",

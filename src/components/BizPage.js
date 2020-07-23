@@ -295,8 +295,9 @@ class BizPage extends Component {
 								/>
 							</ScrollView>
 						</View>
-						<View style={{ position: "relative" }}>
+						<View style={{ position: "relative", flex: 1 }}>
 							<CommentList
+								bizId={this.props.route.params["biz"].business.id}
 								comments={this.props.route.params["biz"].business.comments}
 							/>
 						</View>

@@ -4,7 +4,7 @@ import {
 	Text,
 	View,
 	TouchableOpacity,
-	KeyboardAvoidingView,
+	Flatlist,
 } from "react-native";
 import React from "react";
 import Comment from "./Comment.js";
@@ -32,7 +32,7 @@ export default class CommentList extends React.Component {
 	};
 
 	render() {
-		// console.log(this.props.comments);
+		console.log(this.props);
 		return (
 			<View style={styles.commList}>
 				<Text
@@ -70,12 +70,21 @@ export default class CommentList extends React.Component {
 				)}
 				<View>
 					{this.state.newCommentTogg && (
-						<NewComment handleCancel={this.handleCancel} />
+						<NewComment
+							bizId={this.props.bizId}
+							handleCancel={this.handleCancel}
+						/>
 					)}
 				</View>
-				<ScrollView>
-					<View>{this.renderComments(this.props)}</View>
-				</ScrollView>
+				<SafeAreaView style={{ flex: 1 }}>
+					<ScrollView
+						bounces={true}
+						decelerationRate={0.09}
+						style={{ height: 1000, padding: 1, flex: 1 }}
+					>
+						{this.renderComments(this.props)}
+					</ScrollView>
+				</SafeAreaView>
 			</View>
 		);
 	}
