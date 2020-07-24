@@ -29,9 +29,9 @@ export default class Comment extends React.Component {
 const styles = StyleSheet.create({
 	commentCon: {
 		flex: 1,
-		marginVertical: 7,
+		marginVertical: 0,
 		marginHorizontal: 10,
-		paddingVertical: vh(1.5),
+		paddingVertical: vh(0.5),
 		paddingRight: 20,
 		marginBottom: vh(1),
 		backgroundColor: "blue",
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignSelf: "flex-start",
 		fontFamily: "Marker Felt",
-		fontSize: 21,
-		marginTop: vh(1),
+		fontSize: 19,
+		marginTop: vh(0.5),
 		marginLeft: vh(0.7),
 		fontFamily: "Papyrus",
 	},

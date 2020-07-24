@@ -4,10 +4,11 @@ import {
 	View,
 	TouchableOpacity,
 	Text,
+	Modal,
 } from "react-native";
 import React from "react";
 import { vh, vw } from "react-native-expo-viewport-units";
-import { Button, Icon } from "react-native-elements";
+import { Icon } from "react-native-elements";
 import axios from "axios";
 
 export default class CommentInput extends React.Component {
@@ -19,18 +20,20 @@ export default class CommentInput extends React.Component {
 		this.setState({ text });
 	};
 
-	handleSubmit = () => {
+	handleSubmit = (props) => {
 		if (!this.state.text) return;
+		this.props.handleCancel();
+		this.props.handleSuccess();
+		this.props.handleClose();
+		
+
 		axios
 			.post(`http://localhost:3000/comments`, {
 				user_id: 1,
 				business_id: this.props.bizId,
 				content: this.state.text,
 			})
-			.then(function (response) {
-				this.props.handleCancel();
-				this.setState({ text: "" });
-			})
+			.then(function (response) {})
 			.catch(function (error) {
 				console.log(error);
 			});

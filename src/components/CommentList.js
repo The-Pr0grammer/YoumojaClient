@@ -1,10 +1,10 @@
 import {
-	ScrollView,
 	StyleSheet,
 	Text,
 	View,
 	TouchableOpacity,
-	Flatlist,
+	FlatList,
+	Modal,
 } from "react-native";
 import React from "react";
 import Comment from "./Comment.js";
@@ -18,17 +18,31 @@ export default class CommentList extends React.Component {
 		super(props);
 		this.state = {
 			newCommentTogg: false,
+			successTogg: false,
+			expandTogg: false,
 		};
 	}
 
-	renderComments = (props) => {
-		return props.comments.map((comment) => (
-			<Comment key={comment.id} comment={comment} />
-		));
-	};
+	// renderComments = (props) => {
+	// 	return props.comments.map((comment) => (
+	// 		<Comment key={comment.id} comment={comment} />
+	// 	));
+	// };
 
 	handleCancel = () => {
 		this.setState({ newCommentTogg: false });
+	};
+
+	handleSuccess = () => {
+		setTimeout(() => {
+			this.setState({ successTogg: true });
+		}, 1000);
+	};
+
+	handleClose = () => {
+		setTimeout(() => {
+			this.setState({ successTogg: false });
+		}, 3000);
 	};
 
 	render() {
@@ -68,32 +82,77 @@ export default class CommentList extends React.Component {
 						/>
 					</TouchableOpacity>
 				)}
+
+				<TouchableOpacity
+					style={{
+						position: "absolute",
+						alignSelf: "flex-end",
+						height: vh(37),
+						width: vw(12),
+						marginTop: vh(0.5),
+					}}
+					onPress={() => {
+						this.setState({ newCommentTogg: true });
+					}}
+				>
+					<Icon
+						name="arrows-expand"
+						type="foundation"
+						color="aqua"
+						size={30}
+						style={styles.add}
+					/>
+				</TouchableOpacity>
 				<View>
 					{this.state.newCommentTogg && (
 						<NewComment
 							bizId={this.props.bizId}
 							handleCancel={this.handleCancel}
+							handleSuccess={this.handleSuccess}
+							handleClose={this.handleClose}
 						/>
 					)}
 				</View>
-				<SafeAreaView style={{ flex: 1 }}>
-					<ScrollView
-						bounces={true}
-						decelerationRate={0.09}
-						style={{ height: 1000, padding: 1, flex: 1 }}
+				{this.state.successTogg && (
+					<Modal
+						style={{
+							height: 100,
+							position: "relative",
+							backgroundColor: "purple",
+							flex: 1,
+						}}
+						animationType="fade"
+						transparent={true}
+						visible={true}
+						onRequestClose={() => {
+							Alert.alert("Modal has been closed.");
+						}}
 					>
-						{this.renderComments(this.props)}
-					</ScrollView>
-				</SafeAreaView>
+						<View style={{ backgroundColor: "orange", marginTop: vh(60) }}>
+							<Text
+								style={{
+									fontSize: 22,
+									alignSelf: "center",
+									textAlign: "center",
+								}}
+							>
+								Your Comment Was Posted✅
+							</Text>
+						</View>
+					</Modal>
+				)}
+				<FlatList
+					// contentContainerStyle={{ height: 1000 }}
+					// style={{ height: 100, flexGrow: 1 }}
+					style={{ marginTop: vh(0.5) }}
+					data={this.props.comments}
+					renderItem={({ item }) => <Comment comment={item} />}
+					keyExtractor={(item) => item.id}
+					extraData={this.state}
+				/>
 			</View>
 		);
 	}
-}
-
-{
-	/* {this.props.comments.map((com) =>
-						this.renderItem(com.content, com.id)
-					)} */
 }
 
 const styles = StyleSheet.create({
@@ -105,7 +164,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "green",
 		flexDirection: "column",
 		position: "absolute",
-		// paddingBottom: 500,
+		paddingBottom: vh(54.4), //THIS FIXED THE NOT SCROLLING TO BOTTOM ISSUE AFTER A DAY OF DEBUGGING
 	},
 	add: {
 		// backgroundColor: "pink",
